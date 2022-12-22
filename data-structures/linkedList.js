@@ -1,6 +1,5 @@
 function LinkedList(item) {
-    this.head = null
-    this.tail = null;
+    this.head = null;
 }
 
 
@@ -52,23 +51,19 @@ LinkedList.prototype.insert = function(value, position) {
 
     let currentNode = this.head;
     let prevNode = this.head;
-    const currPosition = 1;
     const node = new Node(value);
 
     if (position === 1){
         node.next = this.head;
         this.head = node;
     } else {
-
-        for (let i=1; i = position; i++){
+        for (let i=1; i < position; i++){
             prevNode = currentNode;
-            currentNode = currentNode.next
+            currentNode = currentNode.next;
         }
         prevNode.next = node;
         node.next = currentNode;
     }
-
-
 
 };
 
@@ -95,3 +90,55 @@ LinkedList.prototype.removeItem = function (value) {
 
 
 };
+
+// remove element at specified position in list
+LinkedList.prototype.removePosition = function (position) {
+
+    let currentNode = this.head;
+    let prevNode = this.head;
+    if (position === 1){
+        this.head = currentNode.next;
+    }else{
+        for (let i=1; i<position; i++){
+            prevNode = currentNode;
+            currentNode = currentNode.next
+        }
+        prevNode.next = currentNode.next; 
+    }
+
+};
+
+// remove element at specified position in list
+LinkedList.prototype.print = function () {
+    let currentNode = this.head;
+    while (currentNode != null){
+        console.log(currentNode.value);
+        currentNode = currentNode.next;
+    }
+
+};
+
+const linkedList = new LinkedList();
+linkedList.push("cat");
+linkedList.push("mouse");
+linkedList.push("tiger");
+linkedList.push("monkey");
+linkedList.push("jasmine");
+console.log("first print");
+linkedList.print();
+linkedList.removePosition(1);
+console.log("second print\n");
+linkedList.print();
+linkedList.addToHead("camel");
+linkedList.removeItem("tiger");
+console.log("third print\n");
+linkedList.print();
+ linkedList.insert("tesla", 2);
+console.log("fourth print\n");
+linkedList.print();
+linkedList.removePosition(2);
+console.log("fifth print\n");
+linkedList.print();
+console.log(linkedList.contains("camel"));
+
+
