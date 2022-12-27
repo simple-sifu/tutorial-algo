@@ -1,4 +1,14 @@
-function LinkedList(item) {
+// A data structure that serves as a collection of elements. Data is stored in nodes, 
+// and each node has a reference to the next node. In order to access elements from a 
+// linked list, the first node (or head) is checked. If the element is not present in 
+// the first node, then the node that is referenced by the head (the second node) is 
+// checked. This action is repeated until the entire list is inspected. The two 
+// principle operations are push (or add) and contains. Push creates a new node and adds 
+// it to the end of the list. Contains checks the entire list and determines if the element
+// is present in any of the nodes.
+
+
+function LinkedList() {
     this.head = null;
 }
 
