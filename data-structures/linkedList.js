@@ -137,7 +137,7 @@ linkedList.print();
 linkedList.addToHead("camel");
 linkedList.removeItem("tiger");
 linkedList.print();
- linkedList.insert("tesla", 2);
+linkedList.insert("tesla", 2);
 linkedList.print();
 linkedList.removePosition(2);
 linkedList.print();
