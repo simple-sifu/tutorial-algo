@@ -22,17 +22,18 @@ LinkedList.prototype.push = function(value) {
 
         currentNode.next = node;
     }
+    console.log(`LinkedList.push(${value})`);
 };
 
 LinkedList.prototype.contains = function(value) {
 
     let currentNode = this.head;
-
     do { 
         if (currentNode.value === value) return true;
         currentNode = currentNode.next;
     } while (currentNode.next)
 
+   
     return false;
 };
 
@@ -43,6 +44,7 @@ LinkedList.prototype.addToHead = function(value) {
     let node = new Node(value);
     this.head = node;
     node.next = firstNode;
+    console.log(`LinkedList.addToHead(${value})`);
 
 };
 
@@ -65,6 +67,8 @@ LinkedList.prototype.insert = function(value, position) {
         node.next = currentNode;
     }
 
+    console.log(`LinkedList.insert(${value}, ${position})`);
+
 };
 
 
@@ -86,7 +90,7 @@ LinkedList.prototype.removeItem = function (value) {
         currentNode = currentNode.next;
     } while (currentNode.next !== null)
 
-    console.log("LinkedList.removeItem - could not find node to remove")
+    console.log(`LinkedList.removeItem(${value})`);
 
 
 };
@@ -105,16 +109,19 @@ LinkedList.prototype.removePosition = function (position) {
         }
         prevNode.next = currentNode.next; 
     }
+    console.log(`LinkedList.removePosition(${position})`);
 
 };
 
 // remove element at specified position in list
 LinkedList.prototype.print = function () {
     let currentNode = this.head;
+    let printArr = [];
     while (currentNode != null){
-        console.log(currentNode.value);
+        printArr.push(currentNode.value);
         currentNode = currentNode.next;
     }
+    console.log(`LinkedList.print()  => ${printArr.join(", ")}\n`);
 
 };
 
@@ -124,21 +131,16 @@ linkedList.push("mouse");
 linkedList.push("tiger");
 linkedList.push("monkey");
 linkedList.push("jasmine");
-console.log("first print");
 linkedList.print();
 linkedList.removePosition(1);
-console.log("second print\n");
 linkedList.print();
 linkedList.addToHead("camel");
 linkedList.removeItem("tiger");
-console.log("third print\n");
 linkedList.print();
  linkedList.insert("tesla", 2);
-console.log("fourth print\n");
 linkedList.print();
 linkedList.removePosition(2);
-console.log("fifth print\n");
 linkedList.print();
-console.log(linkedList.contains("camel"));
+console.log(`LinkedList.contains(camel) = > ${linkedList.contains("camel")}`);
 
 

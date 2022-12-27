@@ -7,16 +7,17 @@ function Queue() {
 
 Queue.prototype.enqueue = function(value) {
     this.storage[this.end++] = value;
-
+    console.log("Queue.enqueue: this.storage =", this.storage);
 };
 
 Queue.prototype.dequeue = function() {
     delete this.storage[this.front++]
+    console.log("Queue.dequeue: this.storage =", this.storage);
 };
 
-Queue.prototype.print = function() {
-    console.log("Queue: storage=", this.storage);
-}
+// Queue.prototype.print = function() {
+//     console.log("Queue.print: this.storage =", this.storage);
+// }
 
 
 
@@ -25,7 +26,7 @@ queue.enqueue("cat");
 queue.enqueue("dog");
 queue.enqueue("camel");
 queue.enqueue("shark");
-queue.print();
+// queue.print();
 queue.dequeue()
 queue.dequeue();
-queue.print();
+// queue.print();
