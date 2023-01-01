@@ -1,11 +1,53 @@
-function BinarySearchTree(value) {
+function Node(value) {
     this.value = value;
     this.right = null;
     this.left = null;
   }
-  
+
+  function BinarySearchTree(){
+    this.head = null;
+  }
+
+  function searchTree(currNode, newNode){
+    if (currNode.value < newNode.value){
+      if (currNode.left === null){
+        currNode.left = newNode;
+      }else{
+        searchTree(currNode.left, newNode);
+      }
+    } else if (currNode.value > newNode.value ) {
+      if (currNode.right === null){
+        currNode.right = newNode;
+      } else {
+        searchTree(currNode.right, newNode);
+      }
+    } else {
+      return;
+    }
+
+  }
   BinarySearchTree.prototype.add = function(value) {
-  
+    const node = new Node(value);
+    let currNode = this.head;
+    if (this.head === null){
+      this.head = node;
+    }else{
+      searchTree(currNode, node);
+    }
+  };
+
+  const inOrder = function (node){
+    let result = [];
+    if (node) {
+      result = result.concat(inOrder(node.right));
+      result.push(node.value);
+      result = result.concat(inOrder(node.left))
+    }
+    return result;
+  }
+
+  BinarySearchTree.prototype.inOrder = function() {
+    return inOrder(this.head);
   };
   
   BinarySearchTree.prototype.contains = function(value) {
@@ -55,3 +97,13 @@ function BinarySearchTree(value) {
   BinarySearchTree.prototype.remove = function(item) {
   
   };
+
+  const binarySearchTree = new BinarySearchTree();
+  binarySearchTree.add(12); 
+  binarySearchTree.add(10); 
+  binarySearchTree.add(6); 
+  binarySearchTree.add(11); 
+  binarySearchTree.add(15); 
+  binarySearchTree.add(18); 
+  binarySearchTree.add(13); 
+  console.log("bst.inorder binarySearchTree.inOrder=", binarySearchTree.inOrder())
