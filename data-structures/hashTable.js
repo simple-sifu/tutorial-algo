@@ -10,9 +10,9 @@ function HashTable() {
   // hint: use the hash function to determine where in the array to store the value
   HashTable.prototype.set = function(key, value) {
     const arrayIndex = hashCode(key, this.SIZE);
-    if (this.storage[arrayIndex] ===  undefined){ // no collision
+    if (this.storage[arrayIndex] === undefined){ // no collision
       this.storage[arrayIndex] = {
-        key: value
+        [key]: value
       }
     }else {
       this.storage[arrayIndex][key] = value;
@@ -23,18 +23,18 @@ function HashTable() {
   
   // return a previously stored value
   HashTable.prototype.get = function(key) {
-    const arrayIndex = hashCode(key);
+    const arrayIndex = hashCode(key, this.SIZE);
     return this.storage[arrayIndex][key];
   };
   
   // returns and removes a key from the hash table
   HashTable.prototype.remove = function(key) {
-    const arrayIndex = hashCode(key);
+    const arrayIndex = hashCode(key, this.SIZE);
     delete this.storage[arrayIndex][key];
     return this.storage.length;
   };
 
-  function print(){
+  HashTable.prototype.print = function() {
     console.log("HashTable.print: this.storage =", this.storage);
   }
   
@@ -59,3 +59,11 @@ function HashTable() {
   hashTable.set("6", "James");
   hashTable.set("7", "Jeff");
   hashTable.set("8", "Joe");
+  console.log("hashTable.get(7) =",hashTable.get("7"));
+  console.log("hashTable.get(8) =",hashTable.get("8"));
+  hashTable.remove("8");
+  hashTable.remove("1");
+  hashTable.print();
+
+
+  
