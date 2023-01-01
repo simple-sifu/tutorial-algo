@@ -10,17 +10,9 @@ function Node(value) {
 
   function searchTree(currNode, newNode){
     if (currNode.value < newNode.value){
-      if (currNode.left === null){
-        currNode.left = newNode;
-      }else{
-        searchTree(currNode.left, newNode);
-      }
+      (currNode.left === null) ? currNode.left = newNode : searchTree(currNode.left, newNode);
     } else if (currNode.value > newNode.value ) {
-      if (currNode.right === null){
-        currNode.right = newNode;
-      } else {
-        searchTree(currNode.right, newNode);
-      }
+     (currNode.right === null) ? currNode.right = newNode : searchTree(currNode.right, newNode);
     } else {
       return;
     }
