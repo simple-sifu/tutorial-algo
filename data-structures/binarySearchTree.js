@@ -8,15 +8,14 @@ function Node(value) {
     this.head = null;
   }
 
-  function searchTree(currNode, newNode){
-    if (currNode.value < newNode.value){
-      (currNode.left === null) ? currNode.left = newNode : searchTree(currNode.left, newNode);
-    } else if (currNode.value > newNode.value ) {
-     (currNode.right === null) ? currNode.right = newNode : searchTree(currNode.right, newNode);
+  function traverse(currNode, newNode){
+    if (currNode.value > newNode.value){
+      (currNode.left === null) ? currNode.left = newNode : traverse(currNode.left, newNode);
+    } else if (currNode.value < newNode.value ) {
+     (currNode.right === null) ? currNode.right = newNode : traverse(currNode.right, newNode);
     } else {
       return;
     }
-
   }
   BinarySearchTree.prototype.add = function(value) {
     const node = new Node(value);
@@ -24,16 +23,16 @@ function Node(value) {
     if (this.head === null){
       this.head = node;
     }else{
-      searchTree(currNode, node);
+      traverse(currNode, node);
     }
   };
 
   const inOrder = function (node){
     let result = [];
     if (node) {
-      result = result.concat(inOrder(node.right));
+      result = result.concat(inOrder(node.left));
       result.push(node.value);
-      result = result.concat(inOrder(node.left))
+      result = result.concat(inOrder(node.right))
     }
     return result;
   }
@@ -42,8 +41,25 @@ function Node(value) {
     return inOrder(this.head);
   };
   
+  function searchValue(currNode, value){
+    if (currNode.value > value){
+      if (currNode.left === null){
+        return false;
+      } else {
+        return searchValue(currNode.left, value);
+      }
+    } else if (currNode.value < value ) {
+     if (currNode.right === null) {
+        return false 
+      } else {
+        return searchValue(currNode.right, value);
+      } 
+    } else {
+      return true
+    }
+  }
   BinarySearchTree.prototype.contains = function(value) {
-  
+    return searchValue(this.head, value)
   };
   
   // applies the callback in the order of depth first (preorder)
@@ -99,3 +115,5 @@ function Node(value) {
   binarySearchTree.add(18); 
   binarySearchTree.add(13); 
   console.log("bst.inorder binarySearchTree.inOrder=", binarySearchTree.inOrder())
+  console.log("bst.contains(15) =", binarySearchTree.contains(15) );
+  console.log("bst.contains(3) =", binarySearchTree.contains(3) );
