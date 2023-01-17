@@ -17,6 +17,7 @@ function Node(value) {
       return;
     }
   }
+  
   BinarySearchTree.prototype.add = function(value) {
     const node = new Node(value);
     let currNode = this.head;
