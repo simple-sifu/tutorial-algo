@@ -27,6 +27,19 @@ class Calculator {
   get [Symbol.toStringTag]() {
     return this.constructor.name;
   }
+
+  calculate(cb) {
+    if (typeof cb === 'function'){
+      cb = cb.bind(this);
+    }
+    return new Promise(function(myResolve, myReject){
+      if (typeof cb !== 'function'){
+        myReject(NaN);
+      }
+      const ans = cb();
+      myResolve(ans);
+    })
+  }
 }
 
 
@@ -174,45 +187,46 @@ describe( "withSummation", function(){
 /**
  * 4. Add a calculate function to Calculator that matches this specification
  */
-// describe( "Calculator.calculate", function(){
-//   let calculator;
+describe( "Calculator.calculate", function(){
+  let calculator;
 
-//   beforeEach( function(){
-//     calculator = new Calculator();
-//   } );
+  beforeEach( function(){
+    calculator = new Calculator();
+  } );
   
-//   it( "returns a promise", function( done ){
-//     const
-//       callDone = () => done(),
-//       calculating = calculator.calculate( () => void 0 );
-//     expect( calculating ).to.be.instanceOf( Promise );
-//     calculating.then( callDone ).catch( callDone );
-//   } );
+  it( "returns a promise", function( done ){
+    const
+      callDone = () => done(),
+      calculating = calculator.calculate( () => void 0 );
+    expect( calculating ).to.be.instanceOf( Promise );
+    calculating.then( callDone ).catch( callDone );
+  } );
      
-//   it( "resolves with the result when the calculation succeeds", function( done ){
-//     const calculating = calculator.calculate( function(){
-//       expect( this ).to.equal( calculator );
-//       let result = 0;
-//       result += this.add( 1, 2 );
-//       result += this.add( 3, 4 );
-//       return result;
-//     } );
-//     calculating
-//       .then( function( result ){
-//         expect( result ).to.equal( 10 );
-//         done();
-//       } )
-//       .catch( () => done() );
-//   } );
+  it( "resolves with the result when the calculation succeeds", function( done ){
+ 
+    const calculating = calculator.calculate(function(){
+      expect( this ).to.equal( calculator );
+      let result = 0;
+      result += this.add( 1, 2 );
+      result += this.add( 3, 4 );
+      return result;
+    });
+    calculating
+      .then( function( result ){
+        expect( result ).to.equal( 10 );
+        done();
+      } )
+      .catch( () => done() );
+  } );
   
-//   it( "rejects with NaN when the calculation fails", function( done ){
-//     const calculating = calculator.calculate();
-//     calculating.catch( function( result ){
-//       expect( result ).to.be.NaN;
-//       done();
-//     } );
-//   } );
-// } );
+  it( "rejects with NaN when the calculation fails", function( done ){
+    const calculating = calculator.calculate();
+    calculating.catch( function( result ){
+      expect( result ).to.be.NaN;
+      done();
+    } );
+  } );
+} );
 
 /**
  * 5. Write an AsBusinessCalculator class mixin that matches this specification
