@@ -88,7 +88,7 @@ function AsBusinessCalculator(Cls) {
     }
   };
 
-  BusinessCalculator.prototype.simpleInterest = mixin.simpleInterest;
+  Object.assign(BusinessCalculator.prototype, mixin);
   return BusinessCalculator
 }
 
