@@ -28,7 +28,7 @@ class Calculator {
 
   calculate(cb) {
     if (typeof cb === 'function'){
-      cb = cb.bind(this);
+      cb.bind(this);
     }
     return new Promise(function(myResolve, myReject){
       if (typeof cb !== 'function'){
@@ -56,10 +56,6 @@ class ScientificCalculator extends Calculator{
 
   log(radians){
     return Math.log(radians);
-  }
-
-  get [Symbol.toStringTag]() {
-    return this.constructor.name;
   }
 
 }
