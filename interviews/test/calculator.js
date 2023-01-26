@@ -29,6 +29,30 @@ class Calculator {
   }
 }
 
+
+class ScientificCalculator extends Calculator{
+  sin(radians){
+    return Math.sin(radians);
+  }
+
+  cos(radians){
+    return Math.cos(radians);
+  }
+
+  tan(radians){
+    return Math.tan(radians);
+  }
+
+  log(radians){
+    return Math.log(radians);
+  }
+
+  get [Symbol.toStringTag]() {
+    return this.constructor.name;
+  }
+
+}
+
 // Setup Mocha and Chai
 // mocha.setup( "bdd" );
 const expect = require('chai').expect;
@@ -72,46 +96,46 @@ describe( "Calculator", function(){
 /**
  * 2. Write a ScientificCalculator class that matches this specification
  */
-// describe( "ScientificCalculator", function(){
-//   let sciCalculator;
+describe( "ScientificCalculator", function(){
+  let sciCalculator;
 
-//   beforeEach( function(){
-//     sciCalculator = new ScientificCalculator();
-//   } );
+  beforeEach( function(){
+    sciCalculator = new ScientificCalculator();
+  } );
   
-//   it( "extends Calculator", function(){
-//     expect( sciCalculator ).to.be.instanceOf( Calculator );
-//     expect( sciCalculator ).to.be.instanceOf( ScientificCalculator );
-//   } );
+  it( "extends Calculator", function(){
+    expect( sciCalculator ).to.be.instanceOf( Calculator );
+    expect( sciCalculator ).to.be.instanceOf( ScientificCalculator );
+  } );
   
-//   it( "does not modify Calculator", function(){
-//     const calculator = new Calculator();
-//     expect( calculator ).to.not.have.property( "sin" );
-//     expect( calculator ).to.not.have.property( "cos" );
-//     expect( calculator ).to.not.have.property( "tan" );
-//     expect( calculator ).to.not.have.property( "log" );
-//   } );
+  it( "does not modify Calculator", function(){
+    const calculator = new Calculator();
+    expect( calculator ).to.not.have.property( "sin" );
+    expect( calculator ).to.not.have.property( "cos" );
+    expect( calculator ).to.not.have.property( "tan" );
+    expect( calculator ).to.not.have.property( "log" );
+  } );
  
-//   it( "returns the sine of PI / 2", function(){
-//     expect( sciCalculator.sin( Math.PI / 2 ) ).to.equal( 1 );
-//   } );
+  it( "returns the sine of PI / 2", function(){
+    expect( sciCalculator.sin( Math.PI / 2 ) ).to.equal( 1 );
+  } );
 
-//   it( "returns the cosine of PI", function(){
-//     expect( sciCalculator.cos( Math.PI ) ).to.equal( -1 );
-//   } );
+  it( "returns the cosine of PI", function(){
+    expect( sciCalculator.cos( Math.PI ) ).to.equal( -1 );
+  } );
  
-//   it( "returns the tangent of 0", function(){
-//     expect( sciCalculator.tan( 0 ) ).to.equal( 0 );
-//   } );
+  it( "returns the tangent of 0", function(){
+    expect( sciCalculator.tan( 0 ) ).to.equal( 0 );
+  } );
  
-//   it( "returns the logarithm of 1", function(){
-//     expect( sciCalculator.log( 1 ) ).to.equal( 0 );
-//   } );
+  it( "returns the logarithm of 1", function(){
+    expect( sciCalculator.log( 1 ) ).to.equal( 0 );
+  } );
   
-//   it( "provides a string description", function(){
-//     expect( toString.call( sciCalculator ) ).to.equal( "[object ScientificCalculator]" );
-//   } );
-// } );
+  it( "provides a string description", function(){
+    expect( toString.call( sciCalculator ) ).to.equal( "[object ScientificCalculator]" );
+  } );
+} );
 
 /**
  * 3. Write a withSummation functional mixin that matches this specification
