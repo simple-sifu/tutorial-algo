@@ -53,6 +53,12 @@ class ScientificCalculator extends Calculator{
 
 }
 
+function withSummation() {
+  this["sum"] = (...args) => {
+    return args.reduce((total, num) => total += num, 0)
+  }
+}
+
 // Setup Mocha and Chai
 // mocha.setup( "bdd" );
 const expect = require('chai').expect;
