@@ -140,30 +140,30 @@ describe( "ScientificCalculator", function(){
 /**
  * 3. Write a withSummation functional mixin that matches this specification
  */
-// describe( "withSummation", function(){
-//   let calculator;
+describe( "withSummation", function(){
+  let calculator;
 
-//   beforeEach( function(){
-//     calculator = new Calculator();
-//   } );
+  beforeEach( function(){
+    calculator = new Calculator();
+  } );
   
-//   it( "should be a function", function(){
-//     expect( withSummation ).to.be.a( "function" );
-//   } );
+  it( "should be a function", function(){
+    expect( withSummation ).to.be.a( "function" );
+  } );
  
-//   it( "returns the Σ of 1 through 4", function(){
-//     const anotherCalculator = new Calculator();
+  it( "returns the Σ of 1 through 4", function(){
+    const anotherCalculator = new Calculator();
     
-//     expect( calculator ).to.not.have.property( "sum" );
-//     expect( anotherCalculator ).to.not.have.property( "sum" );
+    expect( calculator ).to.not.have.property( "sum" );
+    expect( anotherCalculator ).to.not.have.property( "sum" );
     
-//     withSummation.call( calculator );
+    withSummation.call( calculator );
     
-//     expect( calculator ).to.have.property( "sum" ).that.is.a( "function" );
-//     expect( anotherCalculator ).to.not.have.property( "sum" );
-//     expect( calculator.sum( 1, 2, 3, 4 ) ).to.equal( 10 );
-//   } );
-// } );
+    expect( calculator ).to.have.property( "sum" ).that.is.a( "function" );
+    expect( anotherCalculator ).to.not.have.property( "sum" );
+    expect( calculator.sum( 1, 2, 3, 4 ) ).to.equal( 10 );
+  } );
+} );
 
 /**
  * 4. Add a calculate function to Calculator that matches this specification
