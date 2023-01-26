@@ -75,15 +75,21 @@ function withSummation() {
   Object.assign(this, mixin);
 }
 
-class BusinessCalculator extends Calculator {
-
-  get [Symbol.toStringTag]() {
-    return this.constructor.name;
+function AsBusinessCalculator(Cls) {
+  const mixin = {
+    simpleInterest(p, r, t){
+      return p * ( r / 100 ) * t;
+    }
   }
-}
 
-function AsBusinessCalculator(cls) {
-   return null;
+  class BusinessCalculator extends Cls {
+    constructor(){
+      super();
+    }
+  };
+
+  BusinessCalculator.prototype.simpleInterest = mixin.simpleInterest;
+  return BusinessCalculator
 }
 
 // Setup Mocha and Chai
