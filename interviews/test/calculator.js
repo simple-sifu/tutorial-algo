@@ -3,8 +3,6 @@
 class Calculator {
   
   constructor(){
-    this.ClassName = 'Calculator';
-    this.Name = 'Calculator';
   }
 
   add(num1, num2) {
@@ -70,6 +68,17 @@ function withSummation() {
   this["sum"] = (...args) => {
     return args.reduce((total, num) => total += num, 0)
   }
+}
+
+class BusinessCalculator extends Calculator {
+
+  get [Symbol.toStringTag]() {
+    return this.constructor.name;
+  }
+}
+
+function AsBusinessCalculator(cls) {
+   return null;
 }
 
 // Setup Mocha and Chai
@@ -231,44 +240,44 @@ describe( "Calculator.calculate", function(){
 /**
  * 5. Write an AsBusinessCalculator class mixin that matches this specification
  */
-// describe( "AsBusinessCalculator", function(){
-//   const
-//       p = 100,// $100 in principle
-//       t = 7;  // 7 years
-//   let BusinessCalculator, bizCalculator;
+describe( "AsBusinessCalculator", function(){
+  const
+      p = 100,// $100 in principle
+      t = 7;  // 7 years
+  let BusinessCalculator, bizCalculator;
 
-//   beforeEach( function(){
-//     BusinessCalculator = AsBusinessCalculator( Calculator );
-//     bizCalculator = new BusinessCalculator();
-//   } );
+  beforeEach( function(){
+    BusinessCalculator = AsBusinessCalculator( Calculator );
+    bizCalculator = new BusinessCalculator();
+  } );
   
-//   it( "should be a function", function(){
-//     expect( AsBusinessCalculator ).to.be.a( "function" );
-//   } );
+  it( "should be a function", function(){
+    expect( AsBusinessCalculator ).to.be.a( "function" );
+  } );
   
-//   it( "creates a class that extends Calculator", function(){
-//     expect( bizCalculator ).to.be.instanceOf( Calculator );
-//     expect( bizCalculator ).to.be.instanceOf( BusinessCalculator );
-//   } );
+  it( "creates a class that extends Calculator", function(){
+    expect( bizCalculator ).to.be.instanceOf( Calculator );
+    expect( bizCalculator ).to.be.instanceOf( BusinessCalculator );
+  } );
   
-//   it( "does not modify Calculator", function(){
-//     const calculator = new Calculator();
-//     expect( calculator ).to.not.have.property( "simpleInterest" );
-//   } );
+  it( "does not modify Calculator", function(){
+    const calculator = new Calculator();
+    expect( calculator ).to.not.have.property( "simpleInterest" );
+  } );
  
-//   it( "creates a class with a function that returns the simple interest", function(){
-//     let r;
-//     expect( bizCalculator ).to.have.property( "simpleInterest" ).that.is.a( "function" );
-//     r = 5.5;// 5.5% rate
-//     expect( bizCalculator.simpleInterest( p, r, t ) ).to.equal( p * ( r / 100 ) * t );
-//     r = 4.3;// 4.3% rate
-//     expect( Number( bizCalculator.simpleInterest( p, r, t ).toFixed( 1 ) ) ).to.equal( 30.1 );
-//   } );
+  it( "creates a class with a function that returns the simple interest", function(){
+    let r;
+    expect( bizCalculator ).to.have.property( "simpleInterest" ).that.is.a( "function" );
+    r = 5.5;// 5.5% rate
+    expect( bizCalculator.simpleInterest( p, r, t ) ).to.equal( p * ( r / 100 ) * t );
+    r = 4.3;// 4.3% rate
+    expect( Number( bizCalculator.simpleInterest( p, r, t ).toFixed( 1 ) ) ).to.equal( 30.1 );
+  } );
   
-//   it( "creates a class that provides a string description", function(){
-//     expect( toString.call( bizCalculator ) ).to.equal( "[object BusinessCalculator]" );
-//   } );
-// } );
+  it( "creates a class that provides a string description", function(){
+    expect( toString.call( bizCalculator ) ).to.equal( "[object BusinessCalculator]" );
+  } );
+} );
 
 // Run the tests
 // mocha.run();
